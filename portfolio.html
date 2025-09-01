@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Your Name -->
+    <title>Riyanka Bhowmik - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Bebas Neue (for titles) & Lato (for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #141414;
+            color: #e5e5e5;
+            font-family: 'Lato', sans-serif;
+        }
+        .font-bebas {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        /* Custom scrollbar to match Netflix UI */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        .header-gradient {
+            background-image: linear-gradient(to bottom, rgba(20, 20, 20, 0.7) 10%, rgba(20, 20, 20, 0));
+        }
+        .hero-gradient {
+            background-image: linear-gradient(to top, #141414, rgba(20, 20, 20, 0) 50%);
+        }
+        /* Modal Styles */
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            background: #181818;
+            transition: transform 0.3s ease;
+        }
+        /* --- STYLES FOR SKILL CARDS --- */
+        .content-card {
+            background-color: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            background-color: #333;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+            color: #e5e5e5;
+        }
+        .content-card svg {
+            transition: fill 0.3s ease, stroke 0.3s ease;
+            fill: #E50914;
+            stroke: #E50914;
+        }
+        /* --- STYLES FOR RECRUITER CARDS --- */
+        .recruiter-card {
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            transition: transform 0.3s ease;
+        }
+        .recruiter-card:hover {
+             transform: scale(1.05);
+        }
+        .recruiter-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+            transition: background-color 0.3s ease;
+        }
+        .recruiter-card:hover::before {
+            background-color: rgba(0, 0, 0, 0.3); /* Lighter overlay on hover */
+        }
+        .recruiter-card::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 70%;
+            height: 3px;
+            background-color: rgba(229, 9, 20, 0.8);
+            border-radius: 2px;
+            transition: transform 0.3s ease-out;
+            transform-origin: center;
+        }
+        .recruiter-card:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        /* --- IMAGE URLS FOR RECRUITER CARDS --- */
+        .skills-bg { background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/download.jpeg'); }
+        .projects-bg { background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/download%20(1).jpeg'); }
+        .experience-bg { background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/Search%20with%20me.jpeg'); }
+        .achievements-bg { background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/Pixel%20game%20coins%20animation_%20Golden%20pixelated%20coin%20animated%20frames%2C%20retro%2016%20bit%20pixels%20gold%20and%20video%20games%20money%20vector%20illustration%20Stock%20Vector%20_%20Adobe%20Stock.jpeg'); }
+        .extracurriculars-bg { background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/download%20(2).jpeg'); }
+        .contact-bg { background-image: url('https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?auto=format&fit=crop&q=80&w=774'); }
+
+        /* --- STYLES FOR NETFLIX-STYLE CAROUSELS --- */
+        .show-carousel {
+            display: flex;
+            gap: 0.75rem; /* 12px */
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: none; /* For Firefox */
+        }
+        .show-carousel::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
+        }
+        .show-card {
+            flex-shrink: 0;
+            width: 16rem; /* w-64 */
+            height: 24rem; /* h-96 */
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.25rem;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .show-card:hover {
+            transform: scale(1.05);
+            z-index: 20;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .show-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(20, 20, 20, 0.9) 10%, rgba(20, 20, 20, 0.2) 50%, transparent);
+        }
+        .show-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            color: white;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .tech-tag {
+            background-color: rgba(255, 255, 255, 0.15);
+            font-size: 0.65rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 md:p-6 header-gradient transition-colors duration-300">
+        <nav class="container mx-auto flex justify-between items-center">
+            <!-- Your Logo -->
+            <a href="#" class="text-2xl md:text-3xl text-red-600 font-bebas tracking-widest">RIYANKAFLIX</a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#hero" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors">Home</a>
+                <a href="#recruiter-view" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors">Profile</a>
+                 <button id="hire-me-btn" class="bg-red-600 text-white px-4 py-1.5 rounded text-sm font-semibold hover:bg-red-700 transition-colors">
+                    Hire Me
+                </button>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 bg-black/80 rounded-lg p-4">
+            <a href="#hero" class="mobile-link block text-white text-center py-2">Home</a>
+            <a href="#recruiter-view" class="mobile-link block text-white text-center py-2">Profile</a>
+            <button id="mobile-hire-me-btn" class="w-full mt-2 bg-red-600 text-white px-4 py-2 rounded font-semibold hover:bg-red-700 transition-colors">
+                Hire Me
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero "Billboard" Section -->
+        <section id="hero" class="relative h-[60vh] md:h-[80vh] flex items-center">
+            <!-- Hero Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/w.gif');"></div>
+            <div class="absolute inset-0 hero-gradient"></div>
+            <div class="relative z-10 container mx-auto px-4 md:px-6 w-full text-left">
+                <div class="w-full md:w-2/3 lg:w-1/2">
+                    <!-- Featured Project Details -->
+                    <h1 class="text-4xl md:text-6xl font-bebas tracking-wide text-white">Riyanka Bhowmik</h1>
+                    <p class="mt-2 md:mt-4 text-sm md:text-base text-white font-semibold">
+                        Electrical Engineering student at NIT Agartala with a passion for Data Science and Web Development. I transform complex data into intuitive, high-impact digital experiences.
+                    </p>
+                    <div class="mt-4 md:mt-6 flex gap-3">
+                        <a href="https://drive.google.com/drive/folders/1nl6_pIWaV9hQvX4Pohz0ZE9sHf6gTo-y?usp=sharing" target="_blank" class="flex items-center gap-2 bg-white text-black font-bold px-4 md:px-6 py-2 rounded hover:bg-gray-200 transition-colors">
+                            <i data-lucide="play" class="w-5 h-5 text-black fill-black"></i> Resume
+                        </a>
+                        <a href="https://www.linkedin.com/in/riyanka-bhowmik-04882b216/" target="_blank" class="flex items-center gap-2 bg-gray-600/70 text-white font-bold px-4 md:px-6 py-2 rounded hover:bg-gray-500/70 transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recruiter View Section -->
+        <section id="recruiter-view" class="container mx-auto px-4 md:px-6 py-8 md:py-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center">Today's Top Picks for Recruiter</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+                 <a href="#skills" class="recruiter-card skills-bg block p-6 h-24 rounded-lg text-center font-bold text-lg"><span class="relative z-10">Skills</span></a>
+                <a href="#projects" class="recruiter-card projects-bg block p-6 h-24 rounded-lg text-center font-bold text-lg"><span class="relative z-10">Projects</span></a>
+                <a href="#experience" class="recruiter-card experience-bg block p-6 h-24 rounded-lg text-center font-bold text-lg"><span class="relative z-10">Experience</span></a>
+                <a href="#achievements" class="recruiter-card achievements-bg block p-6 h-24 rounded-lg text-center font-bold text-lg"><span class="relative z-10">Achievements</span></a>
+                <a href="#extracurriculars" class="recruiter-card extracurriculars-bg block p-6 h-24 rounded-lg text-center font-bold text-lg"><span class="relative z-10">Extracurriculars</span></a>
+                <a href="#contact" class="recruiter-card contact-bg block p-6 h-24 rounded-lg text-center font-bold text-lg"><span class="relative z-10">Contact Me</span></a>
+            </div>
+        </section>
+
+        <!-- Detailed Content Sections -->
+        <div class="space-y-16 py-8 md:py-12">
+            
+            <!-- Skills Section -->
+            <section id="skills" class="container mx-auto px-4 md:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4">Skills</h2>
+                <div class="bg-[#181818] p-6 md:p-8 rounded-lg">
+                    <!-- Languages & Tools -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-200 mb-4">Languages & Tools</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M16.18,9.55a1.73,1.73,0,0,0-1.7,1.75,1.68,1.68,0,0,0,1.7,1.72,1.7,1.7,0,0,0,1.71-1.72A1.72,1.72,0,0,0,16.18,9.55Zm-8.36,0a1.73,1.73,0,0,0-1.7,1.75,1.68,1.68,0,0,0,1.7,1.72,1.7,1.7,0,0,0,1.71-1.72A1.72,1.72,0,0,0,7.82,9.55ZM12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm5.68,14.21a.57.57,0,0,1-.54.16,3,3,0,0,1-2.61-1.51,1,1,0,0,0-.89-.55H10.36a1,1,0,0,0-.89.55,3,3,0,0,1-2.61,1.51.57.57,0,0,1-.54-.16.63.63,0,0,1-.15-.55,1.26,1.26,0,0,1,.29-.72c.23-.35.53-.74.88-1.16A5.23,5.23,0,0,1,8.3,9.55,3.13,3.13,0,0,1,10.15,8h3.7a3.13,3.13,0,0,1,1.85,1.57,5.23,5.23,0,0,1,1,1.81c.35.42.65.81.88,1.16a1.26,1.26,0,0,1,.29.72A.63.63,0,0,1,17.68,16.21Z"/></svg>
+                                <span class="font-semibold">Python</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M12.45,21.05a1.2,1.2,0,0,1-.85-.35L7.2,16.3a.5.5,0,0,1,0-.7l6-6a.5.5,0,0,1,.7,0l4.4,4.4a.5.5,0,0,1,0,.7L13.3,19.7a1.2,1.2,0,0,1-.85,1.35Zm-1.6-6.1,3.45,3.45,3.25-3.25-3.45-3.45Zm5-5-3-3L16.3,3.5a.5.5,0,0,1,.7,0L21.4,8a.5.5,0,0,1,0,.7Z M10.45,9.05,2.6,16.9a.5.5,0,0,0,0,.7l4.4,4.4a.5.5,0,0,0,.7,0l7.85-7.85a.5.5,0,0,0,0-.7l-4.4-4.4a.5.5,0,0,0-.7,0Z M8.25,18.05,4.8,14.6l6.1-6.1,3.45,3.45Z"/></svg>
+                                <span class="font-semibold">Java</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M13,3V11H21V3M19,9H15V5H19M13,21H21V13H13M19,19H15V15H19M3,21H11V13H3M9,19H5V15H9M3,3V11H11V3M9,9H5V5H9Z"/></svg>
+                                <span class="font-semibold">C/C++</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M12,2A10,10,0,0,0,2,12A10,10,0,0,0,12,22A10,10,0,0,0,22,12A10,10,0,0,0,12,2M12,4A8,8,0,0,1,20,12A8,8,0,0,1,12,20A8,8,0,0,1,4,12A8,8,0,0,1,12,4M11,6V8H8V10H11V12H9C7.9,12,7,12.9,7,14V16C7,17.1,7.9,18,9,18H13V16H16V14H13V12H15C16.1,12,17,11.1,17,10V8C17,6.9,16.1,6,15,6H11M9,14V16H11V14H9M13,8V10H15V8H13Z"/></svg>
+                                <span class="font-semibold">SQL</span>
+                            </div>
+                             <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M21 15.462c.32-1.385.1-2.92-.6-4.14-.9-1.52-2.42-2.52-4.16-2.74-.26-1.92-1.2-3.64-2.74-4.86-1.52-.9-3.26-1.12-4.86-.6-2.18.72-3.64 2.44-4.14 4.68-.08.34-.13.7-.13 1.06c0 .42.06.84.18 1.26-1.6.46-2.92 1.6-3.48 3.16-.72 2.06-.26 4.36 1.14 5.8 1.4 1.46 3.48 2.02 5.54 1.56 1.52.92 3.26 1.12 4.86.62 2.18-.72 3.64-2.46 4.14-4.7.08-.34.13-.7.13-1.06c0-.42-.06-.84-.18-1.26a3.243 3.243 0 011.14-2.22zM12 21.06c-1.34.42-2.76.12-3.88-.78s-1.84-2.28-1.84-3.78c0-1.74 1.02-3.3 2.58-3.92.5-.2.8-.74.68-1.28a3.733 3.733 0 01.32-3.26c.56-1.16 1.7-1.94 2.94-2.16.54-.1 1.06.26 1.22.78.36 1.22.14 2.54-.58 3.52-.28.38-.28.9 0 1.28.28.38.74.5 1.1.34 1.74-.8 3.78-.36 4.9 1.14.72.96 1 2.22.78 3.46-.38 2.02-2.12 3.58-4.22 3.82-.44.06-.82-.24-.92-.66a1.325 1.325 0 00-1.02-.92c-.6-.12-1.2.14-1.56.64a2.22 2.22 0 00-.54 1.86z"/></svg>
+                                <span class="font-semibold">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Data Analytics & Machine Learning -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-200 mb-4">Data Analytics & Machine Learning</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="table-2" class="w-8 h-8"></i>
+                                <span class="font-semibold">Pandas</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="calculator" class="w-8 h-8"></i>
+                                <span class="font-semibold">NumPy</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="cpu" class="w-8 h-8"></i>
+                                <span class="font-semibold">Scikit-learn</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                                <span class="font-semibold">Tableau</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="area-chart" class="w-8 h-8"></i>
+                                <span class="font-semibold">Power BI</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="file-spreadsheet" class="w-8 h-8"></i>
+                                <span class="font-semibold">Excel</span>
+                            </div>
+                             <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                                <span class="font-semibold">Vertex AI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Web Development & UX -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-200 mb-4">Web Development & UX</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="code" class="w-8 h-8"></i>
+                                <span class="font-semibold">HTML/CSS</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M16.32 8.7L12 2.34L7.68 8.7H2.4l9.6 13.01L21.6 8.7h-5.28zM12 5.16l2.35 3.54h-4.7l2.35-3.54zM8.76 10.7h6.48l-3.24 4.32L8.76 10.7z"/></svg>
+                                <span class="font-semibold">Bootstrap</span>
+                            </div>
+                            <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M7.5 0A7.5 7.5 0 0 0 0 7.5v9A7.5 7.5 0 0 0 7.5 24h9a7.5 7.5 0 0 0 7.5-7.5v-9A7.5 7.5 0 0 0 16.5 0h-9Zm0 2.812h9a4.688 4.688 0 0 1 4.688 4.688v9a4.688 4.688 0 0 1-4.688 4.688h-9A4.688 4.688 0 0 1 2.812 16.5v-9A4.688 4.688 0 0 1 7.5 2.812Zm4.219 1.407a1.406 1.406 0 1 0 0 2.812a1.406 1.406 0 1 0 0-2.812Zm-4.22 2.812a4.22 4.22 0 0 0-4.218 4.219a4.22 4.22 0 0 0 4.219 4.218a4.22 4.22 0 0 0 4.218-4.218A4.22 4.22 0 0 0 7.5 7.031Zm4.219 0a4.22 4.22 0 0 0-4.219 4.219a4.22 4.22 0 0 0 4.22 4.218a4.22 4.22 0 0 0 4.218-4.218A4.22 4.22 0 0 0 11.72 7.031Z"/></svg>
+                                <span class="font-semibold">Figma</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Platforms & Other Tools -->
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-200 mb-4">Platforms & Other Tools</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                           <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="function-square" class="w-8 h-8"></i>
+                                <span class="font-semibold">MATLAB</span>
+                           </div>
+                           <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="notebook-text" class="w-8 h-8"></i>
+                                <span class="font-semibold">Jupyter</span>
+                           </div>
+                           <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="cloud" class="w-8 h-8"></i>
+                                <span class="font-semibold">Google Colab</span>
+                           </div>
+                           <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M20.4 2.1l-16.8 6.9 7.8 2.1 2.1 7.8 6.9-16.8zM12.4 12.4l-4.5-1.2 10.8-4.5-5.1 10.2-1.2-4.5z"/></svg>
+                                <span class="font-semibold">VS Code</span>
+                           </div>
+                           <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="palette" class="w-8 h-8"></i>
+                                <span class="font-semibold">Canva</span>
+                           </div>
+                           <div class="content-card flex flex-col items-center justify-center p-4 rounded-lg space-y-2 text-gray-300">
+                                <i data-lucide="pen-tool" class="w-8 h-8"></i>
+                                <span class="font-semibold">Adobe Suite</span>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4 container mx-auto px-4 md:px-6">Projects</h2>
+                
+                <!-- Data Science & Analytics Carousel -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-gray-200 mb-4 container mx-auto px-4 md:px-6">Data Science & Analytics</h3>
+                    <div class="show-carousel pl-4 md:pl-6">
+                        <a href="https://github.com/Riyanka2003/Crop-Disease-Detection" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/Hydroponic%2BRomaine%2B-%2BVertical%2BGreenhouse%2B-%2BEden%2BGreen%2BTechnology%2Bcopy.webp')">
+                            <div class="show-card-overlay"></div>
+                            <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">TensorFlow</span>
+                                    <span class="tech-tag">Flask</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Crop Disease Detection</h3>
+                                <p class="text-xs text-gray-400 mt-1">AI-powered diagnostic tool for farmers.</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Riyanka2003/Customer-Segmentation" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop')">
+                            <div class="show-card-overlay"></div>
+                             <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Streamlit</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Customer Segmentation</h3>
+                                <p class="text-xs text-gray-400 mt-1">Real-time clustering for marketing strategies.</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Riyanka2003/Payment-Gateway-Dashboard" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/the-top-10-most-popular-online-payment-solutions-5e9978d564973.webp')">
+                             <div class="show-card-overlay"></div>
+                             <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Power BI</span>
+                                    <span class="tech-tag">Excel</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Payment Gateway Dashboard</h3>
+                                <p class="text-xs text-gray-400 mt-1">Simulated KPI dashboards to benchmark vendors.</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Riyanka2003/CLV_Prediction_Model" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop')">
+                            <div class="show-card-overlay"></div>
+                             <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Pandas</span>
+                                </div>
+                                <h3 class="font-bold text-lg">CLV Prediction Model</h3>
+                                <p class="text-xs text-gray-400 mt-1">Model for predicting Customer Lifetime Value.</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Riyanka2003/House-Price-Prediction" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/istockphoto-1391413216-612x612.jpg')">
+                            <div class="show-card-overlay"></div>
+                             <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Scikit-learn</span>
+                                </div>
+                                <h3 class="font-bold text-lg">House Price Prediction</h3>
+                                <p class="text-xs text-gray-400 mt-1">Regression model for real estate pricing.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Web Development Carousel -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-gray-200 mb-4 container mx-auto px-4 md:px-6">Web Development</h3>
+                    <div class="show-carousel pl-4 md:pl-6">
+                         <a href="https://github.com/Riyanka2003/Tic-tac-toe_using_js" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/unnamed.png')">
+                            <div class="show-card-overlay"></div>
+                            <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Tic-Tac-Toe Game</h3>
+                                <p class="text-xs text-gray-400 mt-1">Classic game built with vanilla JS.</p>
+                            </div>
+                        </a>
+                         <a href="https://github.com/Riyanka2003/Calculator_using_js" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/Apple-Calculator-history.jpg')">
+                            <div class="show-card-overlay"></div>
+                            <div class="show-card-info">
+                                 <div class="tech-stack">
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">HTML</span>
+                                </div>
+                                <h3 class="font-bold text-lg">JS Calculator</h3>
+                                <p class="text-xs text-gray-400 mt-1">A functional calculator built with vanilla JS.</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Riyanka2003/Sodacan" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/2687efab02013caa20b49f539169e06c.jpg')">
+                            <div class="show-card-overlay"></div>
+                            <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Three.js</span>
+                                </div>
+                                <h3 class="font-bold text-lg">3D Sodacan Animation</h3>
+                                <p class="text-xs text-gray-400 mt-1">A 3D soda can rendered and animated.</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Riyanka2003/Dragonball_onlycss" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/anime-cool-pictures-1920-x-1363-chlkdpsl4evzau0w.jpg')">
+                            <div class="show-card-overlay"></div>
+                            <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Dragonball CSS Art</h3>
+                                <p class="text-xs text-gray-400 mt-1">Character art of Goku made purely with CSS.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- System & Hardware Carousel -->
+                <div class="mt-8">
+                     <h3 class="text-xl font-bold text-gray-200 mb-4 container mx-auto px-4 md:px-6">System & Hardware</h3>
+                    <div class="show-carousel pl-4 md:pl-6">
+                        <a href="#" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/cord-cutting-hype-100648271-orig-1.webp')">
+                             <div class="show-card-overlay"></div>
+                             <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Arduino</span>
+                                    <span class="tech-tag">C++</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Cable Cutting Simulation</h3>
+                                <p class="text-xs text-gray-400 mt-1">Arduino-controlled high-precision cutter.</p>
+                            </div>
+                        </a>
+                        <a href="#" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/1000504445.jpg')">
+                             <div class="show-card-overlay"></div>
+                             <div class="show-card-info">
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Arduino</span>
+                                    <span class="tech-tag">Matlab</span>
+                                </div>
+                                <h3 class="font-bold text-lg">Solar Parameter Monitoring</h3>
+                                <p class="text-xs text-gray-400 mt-1">Arduino device to monitor real-time solar data.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4 container mx-auto px-4 md:px-6">Experience</h2>
+                 <div class="show-carousel pl-4 md:pl-6">
+                    <div class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/istockphoto-537331500-612x612.jpg')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                            <h3 class="font-bold text-lg">Data Science Intern</h3>
+                            <p class="text-xs text-gray-400 mt-1">CodeClause Pvt. Ltd.</p>
+                        </div>
+                    </div>
+                     <a href="https://www.linkedin.com/in/riyanka-bhowmik-04882b216/overlay/experience/2644122560/multiple-media-viewer/?profileId=ACoAADaVbHgBJBXnsTylFt8J1UAnL_uJuY4WeqE&treasuryMediaId=1753346688972" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/WhatsApp%20Image%202025-09-01%20at%2023.21.05_3ca5e65f.jpg')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                            <h3 class="font-bold text-lg">Summer Intern</h3>
+                            <p class="text-xs text-gray-400 mt-1">Airport Authority of India</p>
+                        </div>
+                    </a>
+                     <a href="https://www.linkedin.com/in/riyanka-bhowmik-04882b216/overlay/1747941980667/single-media-viewer/?profileId=ACoAADaVbHgBJBXnsTylFt8J1UAnL_uJuY4WeqE" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/Tripura-OTPC.jpg')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                           <h3 class="font-bold text-lg">Summer Trainee</h3>
+                            <p class="text-xs text-gray-400 mt-1">ONGC Tripura Power Company</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Achievements Section -->
+            <section id="achievements">
+                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4 container mx-auto px-4 md:px-6">Achievements</h2>
+                 <div class="show-carousel pl-4 md:pl-6">
+                    <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1887&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                            <h3 class="font-bold text-lg">Hackathon Finalist</h3>
+                            <p class="text-xs text-gray-400 mt-1">Top 10 at A-1 Fence Launchpad Hackathon.</p>
+                        </div>
+                    </div>
+                     <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                            <h3 class="font-bold text-lg">IIM Bangalore's Impetus</h3>
+                            <p class="text-xs text-gray-400 mt-1">International Business Case Competition.</p>
+                        </div>
+                    </div>
+                     <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                           <h3 class="font-bold text-lg">Flipkart Grid 6.0</h3>
+                            <p class="text-xs text-gray-400 mt-1">Engineering Problem Solving Competition.</p>
+                        </div>
+                    </div>
+                     <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1587440871875-191322ee64b0?q=80&w=2071&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                           <h3 class="font-bold text-lg">Pixel Wizard</h3>
+                            <p class="text-xs text-gray-400 mt-1">Product Design Sprint by Unstop.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Extracurriculars Section -->
+            <section id="extracurriculars">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4 container mx-auto px-4 md:px-6">Extracurriculars</h2>
+                <div class="show-carousel pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/dzire_nita?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?q=80&w=2070&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                           <h3 class="font-bold text-lg">VP, Dzire Dance Club</h3>
+                           <p class="text-xs text-gray-400 mt-1">Managed 120+ performers & led 20+ events.</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/selestia.nita?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1888&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                           <h3 class="font-bold text-lg">Founder, Selestia Fashion Club</h3>
+                           <p class="text-xs text-gray-400 mt-1">Oversaw creative direction and brand identity.</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/malhar_nita?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070&auto=format&fit=crop')">
+                        <div class="show-card-overlay"></div>
+                        <div class="show-card-info">
+                           <h3 class="font-bold text-lg">Graphics Head, Malhar Music Club</h3>
+                           <p class="text-xs text-gray-400 mt-1">Designed over 100 promotional assets.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="container mx-auto px-4 md:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4">Contact Me</h2>
+                <div class="bg-[#181818] p-8 rounded-lg text-center">
+                    <p class="text-lg text-gray-300 mb-6">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    <a href="mailto:riyankabhowmik955@gmail.com" class="inline-block bg-red-600 text-white font-bold px-8 py-3 rounded-md hover:bg-red-700 transition-colors text-lg">
+                        Say Hello
+                    </a>
+                    <div class="flex justify-center space-x-8 mt-8">
+                        <a href="mailto:riyankabhowmik955@gmail.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Email"><i data-lucide="mail" class="w-8 h-8"></i></a>
+                        <a href="https://github.com/Riyanka2003" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-8 h-8"></i></a>
+                        <a href="https://www.linkedin.com/in/riyanka-bhowmik-04882b216/" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- About Me Modal -->
+    <div id="about-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content relative w-full max-w-lg rounded-lg p-8 transform scale-95">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-3xl font-bold text-white mb-6">About & Contact</h2>
+            <div class="text-gray-300 space-y-4">
+                <!-- Your Bio -->
+                <p>Hello! I'm Riyanka, a B.Tech in Electrical Engineering student at NIT Agartala with a passion for data science and web development.</p>
+                <p>I enjoy turning complex problems and datasets into simple, beautiful, and intuitive applications. I love the challenge of building scalable and performant tools that provide real value to users.</p>
+            </div>
+            <div class="mt-8 flex justify-center space-x-6">
+                <!-- Your Social Media Links -->
+                <a href="https://github.com/Riyanka2003" target="_blank" aria-label="GitHub" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="github" class="w-7 h-7"></i></a>
+                <a href="https://www.linkedin.com/in/riyanka-bhowmik-04882b216/" target="_blank" aria-label="LinkedIn" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-7 h-7"></i></a>
+            </div>
+             <div class="mt-8 text-center">
+                 <a href="mailto:riyankabhowmik955@gmail.com" class="inline-block bg-red-600 text-white font-bold px-6 py-3 rounded-md hover:bg-red-700 transition-colors">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-4 md:px-6 py-8 mt-8 border-t border-gray-800">
+        <div class="text-center text-gray-500 text-sm">
+            <!-- Your Name and Current Year -->
+            <p>&copy; 2025 Riyanka Bhowmik. Inspired by Netflix.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const hireMeBtn = document.getElementById('hire-me-btn');
+            const mobileHireMeBtn = document.getElementById('mobile-hire-me-btn');
+            const aboutModal = document.getElementById('about-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const modalContent = aboutModal.querySelector('.modal-content');
+            const header = document.querySelector('header');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            // --- Header Scroll Effect ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-[#141414]');
+                } else {
+                    header.classList.remove('bg-[#141414]');
+                }
+            });
+
+            // --- Modal Logic ---
+            function openModal() {
+                aboutModal.classList.remove('opacity-0', 'invisible');
+                modalContent.classList.remove('scale-95');
+            }
+
+            function closeModal() {
+                modalContent.classList.add('scale-95');
+                aboutModal.classList.add('opacity-0');
+                setTimeout(() => {
+                    aboutModal.classList.add('invisible');
+                }, 300); // Match transition duration
+            }
+
+            hireMeBtn.addEventListener('click', openModal);
+            mobileHireMeBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            aboutModal.addEventListener('click', (e) => {
+                if (e.target === aboutModal) {
+                    closeModal();
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !aboutModal.classList.contains('invisible')) {
+                    closeModal();
+                }
+            });
+
+            // --- Mobile Menu Logic ---
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
