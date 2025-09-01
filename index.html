@@ -51,7 +51,7 @@
             background: #181818;
             transition: transform 0.3s ease;
         }
-        /* --- STYLES FOR SKILL CARDS --- */
+        /* --- STYLES FOR SKILL & EXTRACURRICULAR CARDS --- */
         .content-card {
             background-color: #2a2a2a;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -138,6 +138,7 @@
             background-position: center;
             border-radius: 0.25rem;
             transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+            display: block; /* Make it behave like a link */
         }
         .show-card:hover {
             transform: scale(1.05);
@@ -212,11 +213,11 @@
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/w.gif');"></div>
             <div class="absolute inset-0 hero-gradient"></div>
             <div class="relative z-10 container mx-auto px-4 md:px-6 w-full text-left">
-                <div class="w-full md:w-2/3 lg:w-1/2">
+                <div class="w-full md:w-3/4 lg:w-2/3">
                     <!-- Featured Project Details -->
                     <h1 class="text-4xl md:text-6xl font-bebas tracking-wide text-white">Riyanka Bhowmik</h1>
                     <p class="mt-2 md:mt-4 text-sm md:text-base text-white font-semibold">
-                        Electrical Engineering student at NIT Agartala with a passion for Data Science and Web Development. I transform complex data into intuitive, high-impact digital experiences.
+                        Welcome to my curated collection of digital stories. Grounded in Electrical Engineering, I direct and produce solutions that span from predictive data models to immersive web applications. Think of me as a digital architect, building bridges between complex data and captivating user experiences.
                     </p>
                     <div class="mt-4 md:mt-6 flex gap-3">
                         <a href="https://drive.google.com/drive/folders/1nl6_pIWaV9hQvX4Pohz0ZE9sHf6gTo-y?usp=sharing" target="_blank" class="flex items-center gap-2 bg-white text-black font-bold px-4 md:px-6 py-2 rounded hover:bg-gray-200 transition-colors">
@@ -482,7 +483,7 @@
                 <div class="mt-8">
                      <h3 class="text-xl font-bold text-gray-200 mb-4 container mx-auto px-4 md:px-6">System & Hardware</h3>
                     <div class="show-carousel pl-4 md:pl-6">
-                        <a href="#" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/cord-cutting-hype-100648271-orig-1.webp')">
+                        <a href="https://drive.google.com/drive/folders/1Lvh7FEjAGnzSqhXeb97_4ROeLornEGls?usp=sharing" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/cord-cutting-hype-100648271-orig-1.webp')">
                              <div class="show-card-overlay"></div>
                              <div class="show-card-info">
                                 <div class="tech-stack">
@@ -493,7 +494,7 @@
                                 <p class="text-xs text-gray-400 mt-1">Arduino-controlled high-precision cutter.</p>
                             </div>
                         </a>
-                        <a href="#" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/1000504445.jpg')">
+                        <a href="https://drive.google.com/drive/folders/1Aso4rwbxyv-6BR51PzbNg5m3y4_Gzqw2?usp=sharing" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/1000504445.jpg')">
                              <div class="show-card-overlay"></div>
                              <div class="show-card-info">
                                 <div class="tech-stack">
@@ -512,13 +513,13 @@
             <section id="experience">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4 container mx-auto px-4 md:px-6">Experience</h2>
                  <div class="show-carousel pl-4 md:pl-6">
-                    <div class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/istockphoto-537331500-612x612.jpg')">
+                    <a href="#" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/istockphoto-537331500-612x612.jpg')">
                         <div class="show-card-overlay"></div>
                         <div class="show-card-info">
                             <h3 class="font-bold text-lg">Data Science Intern</h3>
                             <p class="text-xs text-gray-400 mt-1">CodeClause Pvt. Ltd.</p>
                         </div>
-                    </div>
+                    </a>
                      <a href="https://www.linkedin.com/in/riyanka-bhowmik-04882b216/overlay/experience/2644122560/multiple-media-viewer/?profileId=ACoAADaVbHgBJBXnsTylFt8J1UAnL_uJuY4WeqE&treasuryMediaId=1753346688972" target="_blank" class="show-card" style="background-image: url('https://raw.githubusercontent.com/Riyanka2003/Portfolio/main/WhatsApp%20Image%202025-09-01%20at%2023.21.05_3ca5e65f.jpg')">
                         <div class="show-card-overlay"></div>
                         <div class="show-card-info">
@@ -540,34 +541,34 @@
             <section id="achievements">
                  <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 border-l-4 border-red-600 pl-4 container mx-auto px-4 md:px-6">Achievements</h2>
                  <div class="show-carousel pl-4 md:pl-6">
-                    <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1887&auto=format&fit=crop')">
+                    <a href="#" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1887&auto=format&fit=crop')">
                         <div class="show-card-overlay"></div>
                         <div class="show-card-info">
                             <h3 class="font-bold text-lg">Hackathon Finalist</h3>
                             <p class="text-xs text-gray-400 mt-1">Top 10 at A-1 Fence Launchpad Hackathon.</p>
                         </div>
-                    </div>
-                     <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')">
+                    </a>
+                     <a href="https://unstop.com/certificate-preview/316e572b-aa45-4898-b8fd-81170bf2e67a" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')">
                         <div class="show-card-overlay"></div>
                         <div class="show-card-info">
                             <h3 class="font-bold text-lg">IIM Bangalore's Impetus</h3>
                             <p class="text-xs text-gray-400 mt-1">International Business Case Competition.</p>
                         </div>
-                    </div>
-                     <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop')">
+                    </a>
+                     <a href="https://unstop.com/certificate-preview/588202b4-6027-4997-a8e5-05a869d15725?utm_campaign=" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop')">
                         <div class="show-card-overlay"></div>
                         <div class="show-card-info">
                            <h3 class="font-bold text-lg">Flipkart Grid 6.0</h3>
                             <p class="text-xs text-gray-400 mt-1">Engineering Problem Solving Competition.</p>
                         </div>
-                    </div>
-                     <div class="show-card" style="background-image: url('https://images.unsplash.com/photo-1587440871875-191322ee64b0?q=80&w=2071&auto=format&fit=crop')">
+                    </a>
+                     <a href="https://unstop.com/certificate-preview/68ffa96f-610f-4635-8b1a-10d185edf73f?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-pixel-wizard" target="_blank" class="show-card" style="background-image: url('https://images.unsplash.com/photo-1587440871875-191322ee64b0?q=80&w=2071&auto=format&fit=crop')">
                         <div class="show-card-overlay"></div>
                         <div class="show-card-info">
                            <h3 class="font-bold text-lg">Pixel Wizard</h3>
                             <p class="text-xs text-gray-400 mt-1">Product Design Sprint by Unstop.</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </section>
 
@@ -721,3 +722,4 @@
     </script>
 </body>
 </html>
+
