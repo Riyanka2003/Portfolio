@@ -52,7 +52,7 @@
         .show-carousel { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: none; }
         .show-carousel::-webkit-scrollbar { display: none; }
         
-        /* --- CHANGED: HORIZONTAL RECTANGLE DIMENSIONS --- */
+        /* HORIZONTAL RECTANGLE DIMENSIONS */
         .show-card { 
             flex-shrink: 0; 
             width: 22rem;   /* Wider */
@@ -71,6 +71,20 @@
         .show-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; color: white; }
         .tech-stack { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.5rem; }
         .tech-tag { background-color: rgba(255, 255, 255, 0.15); font-size: 0.65rem; padding: 0.125rem 0.5rem; border-radius: 9999px; font-weight: 600; }
+
+        /* --- SKILLS LOGO COLOR OVERRIDE --- */
+        #skills .content-card svg {
+            color: #ff8c00; /* Standard Orange */
+        }
+        /* Fix for filled icons (Custom SVGs like Python/Java) */
+        #skills .content-card svg:not(.lucide) {
+            fill: currentColor;
+        }
+        /* Fix for stroked icons (Lucide icons like Pandas/NumPy) */
+        #skills .content-card .lucide {
+            stroke: currentColor;
+        }
+
     </style>
 </head>
 <body class="antialiased">
